@@ -8,7 +8,7 @@ interface Props {
 const Editor = ({setNodes}:Props) => {
     const [userInput, setuserInput] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
-    const [json, setJson] = useState<object>({});
+    const [json, setJson] = useState<object>([]);
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -50,16 +50,16 @@ const Editor = ({setNodes}:Props) => {
             console.log(jsonparse)
             setError(false)
             setJson(jsonparse)
-            setuserInput(e.target.value)
+            setuserInput(e.target.value.substring(1, e.target.value.length-1))
             setNodes(convertJsonToNode(jsonparse))
         } catch(err){
-            setuserInput(e.target.value)
+          setuserInput(e.target.value.substring(1, e.target.value.length-1))
             setError(true)
         }   
     }
   return (
     <div>
-        <textarea ref={textareaRef} className={`border-2 m-4 w-full p-2 resize-none focus:outline-none ${error ? " border-red-700" : " border-green-600"}`} rows={25} value={userInput} onChange={e=>{handleOnChange(e)}} >
+        <textarea ref={textareaRef} className={`border-2 m-4 w-full p-2 resize-none focus:outline-none ${error ? " border-red-700" : " border-green-600"}`} rows={25} value={"["+userInput+"]"} onChange={e=>{handleOnChange(e)}} >
         </textarea>
     </div>
   )
