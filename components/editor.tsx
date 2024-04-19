@@ -47,7 +47,6 @@ const Editor = ({setNodes}:Props) => {
     const handleOnChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
         try{
             const jsonparse = JSON.parse(e.target.value)
-            console.log(jsonparse)
             setError(false)
             setJson(jsonparse)
             setuserInput(e.target.value.substring(1, e.target.value.length-1))

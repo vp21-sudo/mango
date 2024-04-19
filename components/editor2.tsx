@@ -3,25 +3,42 @@ import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import { convertJsonToNode } from '@/utils/json-to-node';
 
 interface Props {
-    setNodes: any
+  setNodes: any
+}
+
+interface MyObject {
+  type: String,
+  [key: string]: any
+}
+
+
+const EditorB = ({ setNodes }: Props) => {
+  const [editorValue, setEditorValue] = useState<string>("[]");
+  const handleOnChange = (e: any) => {
+    setEditorValue(e?.valueOf() || "")
   }
-
-
-const EditorB = ({setNodes} :Props) => {
-    const [editorValue, setEditorValue] = useState("{}");
-    const handleOnChange = (e:any) => {
-        setEditorValue(e?.valueOf() || "")            
-    }
-    useEffect(() => {
-        try{
-            setNodes(convertJsonToNode(JSON.parse(editorValue)))
-        } catch(e){
-            console.log(e)
+  useEffect(() => {
+    try {
+      const jsonArrayNodes: Array<MyObject> = JSON.parse(editorValue)
+      const nodesValues = jsonArrayNodes.map((obj, i) => {
+        return {
+          id: `${i}`,
+          type: "fieldTableNode",
+          position: { x: 100 + (i * 20), y: 100 + (i * 100) },
+          draggable: true,
+          data: {
+            fields: convertJsonToNode(obj)
+          }
         }
-    }, [editorValue, setNodes]);
+      })
+      setNodes(nodesValues)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [editorValue, setNodes]);
   return (
     <div className=' text-3xl'>
-        <Editor theme='vs-dark' height="100vh"   defaultLanguage='json' value={editorValue} onChange={e=>{handleOnChange(e)}}/>
+      <Editor theme='vs-dark' height="100vh" defaultLanguage='json' value={editorValue} onChange={e => { handleOnChange(e) }} />
     </div>
   )
 }
