@@ -26,7 +26,8 @@ const FieldTableNode = ({ data }: any) => {
           ))}
           <tr>
             <th className=' h-1 bg-blue-200 w-full justify-around items-center ' colSpan={100}>
-              <div>
+              <div className='w-full flex justify-between items-center px-4 '>
+                <p>Utils:</p>
                 <input type='color' className=' p-0 m-0 rounded-sm  w-6  inline-block bg-blue-200 ' value={bg} onChange={e => { onColorBgColorChange(e) }} />
               </div>
             </th>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
+import Editor from '@monaco-editor/react';
 import { convertJsonToNode } from '@/utils/json-to-node';
 
 interface Props {
@@ -38,7 +38,7 @@ const EditorB = ({ setNodes }: Props) => {
   }, [editorValue, setNodes]);
   return (
     <div className=' text-3xl'>
-      <Editor theme='vs-dark' height="100vh" defaultLanguage='json' value={editorValue} onChange={e => { handleOnChange(e) }} />
+      <Editor theme='vs-dark' className=' h-full md:h-full' defaultLanguage='json' value={editorValue} onChange={e => { handleOnChange(e) }} />
     </div>
   )
 }

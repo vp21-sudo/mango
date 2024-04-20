@@ -69,7 +69,7 @@ const Flow = ({ nodes }: Props) => {
   );
 
   return (
-    <div className=' w-full h-screen'>
+    <div className=' w-full h-full'>
       <ReactFlowProvider>
         <ReactFlow
           nodes={elements}

@@ -8,7 +8,7 @@ const Page = () => {
   const [nodes, setNodes] = useState([]);
 
   return (
-    <div className=' grid grid-cols-2 gap-2'>
+    <div className=' h-screen grid grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-2'>
       {/* <Editor setNodes={setNodes}/> */}
       <EditorB setNodes={setNodes}/>
       <Flow nodes={nodes}/>
